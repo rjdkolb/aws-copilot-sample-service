@@ -73,6 +73,7 @@ phases:
             timestamp=$(date +%s)
             aws s3 cp "$ADDONSFILE" "s3://stackset-demo-infrastruc-pipelinebuiltartifactbuc-4pu3hleebui0/manual/$timestamp/$workload.addons.stack.yml";
             jq --arg a "https://stackset-demo-infrastruc-pipelinebuiltartifactbuc-4pu3hleebui0.s3.eu-central-1.amazonaws.com/manual/$timestamp/$workload.addons.stack.yml" '.Parameters.AddonsTemplateURL = $a' ./infrastructure/$workload-test.params.json > "$tmp" && mv "$tmp" ./infrastructure/$workload-test.params.json
+            jq --arg a "https://stackset-demo-infrastruc-pipelinebuiltartifactbuc-4pu3hleebui0.s3.eu-central-1.amazonaws.com/manual/$timestamp/$workload.addons.stack.yml" '.Parameters.AddonsTemplateURL = $a' ./infrastructure/$workload-production.params.json > "$tmp" && mv "$tmp" ./infrastructure/$workload-production.params.json
           fi
         done;
       # Build images
